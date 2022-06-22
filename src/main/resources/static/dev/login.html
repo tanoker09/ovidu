@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Вход в Contest Streamer (dev)</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"></script>
+</head>
+<body>
+  Выберите пользователя, под которым вы хотите войти.
+  <form method="post" action="/api/dev/authenticate">
+    <div>
+      <label for="userEmail">Пользователь:</label>
+      <select name="userEmail">
+        <option>Загрузка...</option>
+      </select>
+    </div>
+    <div>
+      <label for="redirectUri">Возврат на URL:</label>
+      <input name="redirectUri"></input>
+    </div>
+    <div>
+      <input type="submit" value="Войти"></input>
+    </div>
+  </form>
+
+  <script lang="javascript">
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectUri = urlParams.get('redirectUri');
+
+    const redirectUriEl = document.querySelector('input[name=redirectUri]');
+    redirectUriEl.value = redirectUri;
+
+    axios
+      .get('/api/dev/users')
+      .then((response) => {
+        const userIdEl = document.querySelector('select[name=userEmail]');
+        userIdEl.innerHTML = '';
+        for (user of response.data.results) {
+          const opt = document.createElement('option');
+          opt.innerText = `${user.email} - ${user.name} (${user.role})`
+          opt.value = user.email
+          userIdEl.appendChild(opt);
+        }
+      })
+      .catch((error) => {
+        alert(`Can not load users list! ${error}`)
+      });
+  </script>
+</body>
+</html>

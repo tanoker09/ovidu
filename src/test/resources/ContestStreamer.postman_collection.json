@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "18b3b8d1-3310-4f6f-89a4-e3faa66fe924",
+		"name": "ContestStreamer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Admin] Create OV Instance",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5442/api/admin/ovInstances",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5442",
+					"path": [
+						"api",
+						"admin",
+						"ovInstances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Admin] Get OV Instances",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5442/api/admin/ovInstances?page=1&count=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5442",
+					"path": [
+						"api",
+						"admin",
+						"ovInstances"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "count",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Admin] Update OV Instance Status",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"inactive\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5442/api/admin/ovInstances/79c42020-32c8-4288-bcee-ce637a184ce1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5442",
+					"path": [
+						"api",
+						"admin",
+						"ovInstances",
+						"79c42020-32c8-4288-bcee-ce637a184ce1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Admin] Add User to Contest",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"79c42020-32c8-4288-bcee-ce637a184ce1\",\r\n    \"userRole\": \"watcher\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5442/api/admin/contests/79c42020-32c8-4288-bcee-ce637a184ce1/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5442",
+					"path": [
+						"api",
+						"admin",
+						"contests",
+						"79c42020-32c8-4288-bcee-ce637a184ce1",
+						"user"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

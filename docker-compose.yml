@@ -1,0 +1,28 @@
+version: '3.1'
+services:
+
+  openvidu:
+    image: openvidu/openvidu-server-kms:2.16.0
+    ports:
+      - '4443:4443'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./recordings:/opt/openvidu/recordings
+    environment:
+      - OPENVIDU_SECRET=openvidu
+      - OPENVIDU_RECORDING=true
+      - OPENVIDU_RECORDING_PATH=/opt/openvidu/recordings
+      - OPENVIDU_RECORDING_AUTOSTOP_TIMEOUT=1200000
+
+  dynamodb-local:
+    image: amazon/dynamodb-local:1.13.5
+    command: -jar DynamoDBLocal.jar -sharedDb
+    ports:
+      - '8000:8000'
+
+  dynamodb-admin:
+    image: aaronshaf/dynamodb-admin:latest
+    ports:
+      - '8001:8001'
+    environment:
+      - DYNAMO_ENDPOINT=http://dynamodb-local:8000
